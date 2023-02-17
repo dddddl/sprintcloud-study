@@ -1,0 +1,74 @@
+server:
+  port: 15010
+
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+    gateway:
+      discovery:
+        locator:
+          enabled: false
+          lowerCaseServiceId: true
+      routes:
+        - id: provider
+          uri: lb://winter-nacos-provider
+          predicates:
+            - Path=/provider/**
+          filters:
+            - StripPrefix=1 #StripPrefix=1就代表截取路径的个数为1，比如前端过来请求/test/good/1/view，匹配成功后，路由到后端的请求路径就会变成http://localhost:8888/good/1/view
+        - id: consumer
+          uri: lb://winter-nacos-consumer
+          predicates:
+            - Path=/consumer/**
+          filters:
+            - StripPrefix=1
+        - id: auth
+          uri: lb://auth
+          predicates:
+            - Path=/auth/**
+          filters:
+            - StripPrefix=1
+        - id: order-server
+          uri: lb://order-server
+          predicates:
+            - Path=/order/**
+          filters:
+            - StripPrefix=1
+        - id: stock-server
+          uri: lb://stock-server
+          predicates:
+            - Path=/stock/**
+          filters:
+            - StripPrefix=1
+    sentinel:
+      transport:
+        port: 15000
+        dashboard: 127.0.0.1:8748
+
+  redis:
+    host: localhost
+    port: 6379
+    password: root
+    timeout: 10000
+    database: 0
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0
+
+  application:
+    name: winter-gateway
+  zipkin:
+    sender:
+      type: web
+    base-url: http://localhost:9411/
+    service:
+      name: gateway
+
+  sleuth:
+    sampler:
+      probability: 1 #设置采样率默认为 0.1 注意之前的版本是percentage 新版本中更换为 probability
