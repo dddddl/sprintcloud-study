@@ -1,12 +1,12 @@
 package com.dongcheng.gateway.filter;
 
 import com.alibaba.fastjson.JSON;
-import com.dongcheng.auth.constants.DefaultConstants;
-import com.dongcheng.auth.entity.UserInfoEntity;
-import com.dongcheng.auth.enums.ResultCodeEnum;
-import com.dongcheng.auth.utils.CommonResult;
-import com.dongcheng.auth.utils.JwtUtil;
-import com.dongcheng.gateway.redis.UserRedisCollection;
+import com.dongcheng.common.bean.UserInfoBean;
+import com.dongcheng.common.constants.DefaultConstants;
+import com.dongcheng.common.enums.ResultCodeEnum;
+import com.dongcheng.common.utils.CommonResult;
+import com.dongcheng.common.utils.JwtUtil;
+import com.dongcheng.gateway.redis.GatewayRedisCollection;
 import com.google.common.collect.Maps;
 import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
@@ -32,16 +32,16 @@ import java.util.Map;
 public class AuthorizeFilter implements GlobalFilter, Ordered {
 
     @Autowired
-    UserRedisCollection userRedisCollection;
+    GatewayRedisCollection gatewayRedisCollection;
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-
+        log.info("filter");
         ServerHttpRequest request = exchange.getRequest();
         ServerHttpResponse response = exchange.getResponse();
 
         String uri = request.getURI().getPath();
-//前端访问不到header问题
+        //前端访问不到header问题
 
         response.getHeaders().add("Access-Control-Allow-Headers", "X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept, token");
         response.getHeaders().add("Access-Control-Expose-Headers", "token");
@@ -82,9 +82,9 @@ public class AuthorizeFilter implements GlobalFilter, Ordered {
                     Map<String, Object> map = Maps.newHashMapWithExpectedSize(1);
                     map.put(DefaultConstants.USERID, userId.toString());
 
-                    UserInfoEntity userInfo = userRedisCollection.getAuthUserInfoAndCache(userId);
+                    UserInfoBean userInfo = gatewayRedisCollection.getAuthUserInfoAndCache(userId);
 
-                    //判断是否
+//                    判断是否
                     if (userInfo == null) {
                         response.setStatusCode(HttpStatus.UNAUTHORIZED);
                         return getVoidMono(response, ResultCodeEnum.UNAUTHORIZED, "未登录");

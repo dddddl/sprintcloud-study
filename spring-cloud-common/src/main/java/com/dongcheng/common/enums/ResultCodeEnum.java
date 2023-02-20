@@ -1,7 +1,7 @@
-package com.dongcheng.auth.enums;
+package com.dongcheng.common.enums;
 
 
-import com.dongcheng.auth.interfaces.ResponseCodeInterface;
+import com.dongcheng.common.interfaces.ResponseCodeInterface;
 
 public enum ResultCodeEnum implements ResponseCodeInterface {
     SUCCESS(200, "操作成功"),

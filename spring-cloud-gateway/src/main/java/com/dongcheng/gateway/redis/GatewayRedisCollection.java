@@ -1,8 +1,8 @@
 package com.dongcheng.gateway.redis;
 
-import com.dongcheng.auth.constants.DefaultConstants;
-import com.dongcheng.auth.entity.UserInfoEntity;
-import com.dongcheng.auth.utils.CommonAssert;
+import com.dongcheng.common.bean.UserInfoBean;
+import com.dongcheng.common.constants.DefaultConstants;
+import com.dongcheng.common.utils.CommonAssert;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -11,19 +11,19 @@ import org.springframework.stereotype.Component;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
-@Component("gatewayUserRedisCollection")
-public class UserRedisCollection {
+@Component
+public class GatewayRedisCollection {
 
 
     @Autowired
     private RedisTemplate redisTemplate;
 
 
-    public UserInfoEntity getAuthUserInfoAndCache(Long userId) {
+    public UserInfoBean getAuthUserInfoAndCache(Long userId) {
         CommonAssert.meetCondition(userId == null, "为获取到userId");
         String key = DefaultConstants.USER_INFO_REDIS + userId;
 
-        UserInfoEntity entity = (UserInfoEntity) redisTemplate.opsForValue().get(key);
+        UserInfoBean entity = (UserInfoBean) redisTemplate.opsForValue().get(key);
         if (null != entity) {
             redisTemplate.opsForValue().set(key, entity, 60 * 24 * 60 * 60 * 1000, TimeUnit.MILLISECONDS);
             return entity;

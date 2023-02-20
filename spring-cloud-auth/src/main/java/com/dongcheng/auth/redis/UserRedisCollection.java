@@ -1,7 +1,8 @@
 package com.dongcheng.auth.redis;
 
-import com.dongcheng.auth.constants.DefaultConstants;
+import com.dongcheng.common.bean.UserInfoBean;
 import com.dongcheng.auth.entity.UserInfoEntity;
+import com.dongcheng.common.constants.DefaultConstants;
 import com.dongcheng.auth.service.LoginService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,18 +22,29 @@ public class UserRedisCollection {
     @Autowired
     private LoginService loginService;
 
-    public UserInfoEntity getAuthUserInfoAndCache(Long userId) {
+
+    public UserInfoBean getAuthUserInfoAndCache(Long userId) {
         log.info("获取用户权限并且设置缓存开始, userId: [{}]", userId);
         String key = DefaultConstants.USER_INFO_REDIS + userId;
-        UserInfoEntity entity = (UserInfoEntity) redisTemplate.opsForValue().get(key);
-        if (null != entity) {
-            return entity;
+        UserInfoBean bean = (UserInfoBean) redisTemplate.opsForValue().get(key);
+        if (null != bean) {
+            return bean;
         }
-        entity = loginService.getById(userId);
+        UserInfoEntity entity = loginService.getById(userId);
         if (null == entity) {
             return null;
         }
-        redisTemplate.opsForValue().set(key, entity, 60 * 24 * 60 * 60 * 1000, TimeUnit.MILLISECONDS);
-        return entity;
+
+        bean = new UserInfoBean(entity.getId(), entity.getAccount(), entity.getStatus(), entity.getPassword());
+
+        redisTemplate.opsForValue().set(key, bean, 60 * 24 * 60 * 60 * 1000, TimeUnit.MILLISECONDS);
+        return bean;
     }
+
+    public void destroyUserInfo(String userId) {
+        String key = DefaultConstants.USER_INFO_REDIS + userId;
+        redisTemplate.delete(key);
+    }
+
+
 }

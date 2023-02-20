@@ -1,8 +1,8 @@
-package com.dongcheng.auth.utils;
+package com.dongcheng.common.utils;
 
 
-import com.dongcheng.auth.enums.ResultCodeEnum;
-import com.dongcheng.auth.interfaces.ResponseCodeInterface;
+import com.dongcheng.common.enums.ResultCodeEnum;
+import com.dongcheng.common.interfaces.ResponseCodeInterface;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -97,7 +97,7 @@ public class CommonResult<T> implements Serializable {
     /**
      * 失败返回结果
      *
-     * @param errorCode 错误码
+     *  errorCode 错误码
      */
     public static <T> CommonResult<T> failed(ResponseCodeInterface responseCodeInterface) {
         return new CommonResult<T>(responseCodeInterface.getCode(), responseCodeInterface.getMessage());
@@ -106,7 +106,7 @@ public class CommonResult<T> implements Serializable {
     /**
      * 失败返回结果
      *
-     * @param errorCode 错误码
+     * errorCode 错误码
      */
     public static <T> CommonResult<T> failed(ResponseCodeInterface responseCodeInterface, String message) {
         return new CommonResult<T>(responseCodeInterface.getCode(), message);

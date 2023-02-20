@@ -1,4 +1,4 @@
-package com.dongcheng.auth.utils;
+package com.dongcheng.common.utils;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;

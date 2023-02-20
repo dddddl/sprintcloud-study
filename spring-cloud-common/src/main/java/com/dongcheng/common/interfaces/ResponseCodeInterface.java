@@ -1,4 +1,4 @@
-package com.dongcheng.auth.interfaces;
+package com.dongcheng.common.interfaces;
 
 public interface ResponseCodeInterface {
 

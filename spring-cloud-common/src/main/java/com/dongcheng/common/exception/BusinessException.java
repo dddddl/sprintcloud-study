@@ -1,6 +1,6 @@
-package com.dongcheng.auth.exception;
+package com.dongcheng.common.exception;
 
-import com.dongcheng.auth.interfaces.ResponseCodeInterface;
+import com.dongcheng.common.interfaces.ResponseCodeInterface;
 import lombok.Getter;
 
 import java.util.Map;

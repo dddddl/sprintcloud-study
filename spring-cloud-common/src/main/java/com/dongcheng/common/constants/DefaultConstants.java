@@ -1,4 +1,4 @@
-package com.dongcheng.auth.constants;
+package com.dongcheng.common.constants;
 
 /**
  * @author winterchen

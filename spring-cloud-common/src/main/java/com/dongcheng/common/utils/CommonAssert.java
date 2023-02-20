@@ -1,10 +1,10 @@
-package com.dongcheng.auth.utils;
+package com.dongcheng.common.utils;
 
 
 
-import com.dongcheng.auth.enums.ResultCodeEnum;
-import com.dongcheng.auth.exception.BusinessException;
-import com.dongcheng.auth.interfaces.ResponseCodeInterface;
+import com.dongcheng.common.enums.ResultCodeEnum;
+import com.dongcheng.common.exception.BusinessException;
+import com.dongcheng.common.interfaces.ResponseCodeInterface;
 
 import java.util.Map;
 

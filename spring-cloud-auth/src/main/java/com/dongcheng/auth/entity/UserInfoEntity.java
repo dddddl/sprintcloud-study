@@ -7,10 +7,12 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Builder;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
 @TableName("user_info")
 @Builder
-public class UserInfoEntity {
+public class UserInfoEntity implements Serializable {
 
     private static final long serialVersionUID = 92049696933194360L;
 

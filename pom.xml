@@ -8,22 +8,22 @@
         <version>2.2.13.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-
     <groupId>com.dongcheng</groupId>
-    <artifactId>sprintcloud-study</artifactId>
+    <artifactId>springcloud-study</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>sprintcloud-study</name>
-    <description>sprintcloud-study</description>
+    <name>springcloud-study</name>
+    <description>Demo project for Spring Boot</description>
     <packaging>pom</packaging>
-
 
     <modules>
         <module>spring-cloud-nacos-consumer</module>
         <module>spring-cloud-nacos-provider</module>
-        <module>spring-cloud-gateway</module>
         <module>spring-cloud-auth</module>
+        <module>spring-cloud-gateway</module>
+        <module>spring-cloud-common</module>
+        <!--        <module>order-server</module>-->
+<!--        <module>stock-server</module>-->
     </modules>
-
     <properties>
         <java.version>1.8</java.version>
         <spring-cloud.version>Hoxton.RELEASE</spring-cloud.version>
@@ -35,7 +35,6 @@
         <mysql.version>8.0.16</mysql.version>
         <lombok.version>1.18.8</lombok.version>
     </properties>
-
     <dependencyManagement>
         <dependencies>
             <!-- springCloud依赖 -->
@@ -94,14 +93,5 @@
 
         </dependencies>
     </dependencyManagement>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>
