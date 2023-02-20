@@ -45,8 +45,7 @@ spring:
     sentinel:
       transport:
         port: 15000
-        dashboard: 127.0.0.1:8748
-
+        dashboard: localhost:8748
   redis:
     host: localhost
     port: 6379
