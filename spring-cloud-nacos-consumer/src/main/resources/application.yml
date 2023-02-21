@@ -10,6 +10,12 @@ spring:
       transport:
         port: 18763
         dashboard: 127.0.0.1:8748
+  zipkin:
+    sender:
+      type: web
+    base-url: http://localhost:9411/
+    service:
+      name: consumer
 
 feign:
   sentinel:
