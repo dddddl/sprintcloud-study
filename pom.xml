@@ -21,8 +21,8 @@
         <module>spring-cloud-auth</module>
         <module>spring-cloud-gateway</module>
         <module>spring-cloud-common</module>
-        <!--        <module>order-server</module>-->
-<!--        <module>stock-server</module>-->
+        <module>order-server</module>
+        <module>stock-server</module>
     </modules>
     <properties>
         <java.version>1.8</java.version>

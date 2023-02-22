@@ -64,21 +64,21 @@ public class GatewayConfiguration {
                     add(new ApiPathPredicateItem().setPattern("/provider/**")
                             .setMatchStrategy(SentinelGatewayConstants.URL_MATCH_STRATEGY_PREFIX));
                 }});
-//        ApiDefinition api3 = new ApiDefinition("order")
-//                .setPredicateItems(new HashSet<ApiPredicateItem>() {{
-//
-//                    add(new ApiPathPredicateItem().setPattern("/order/**")
-//                            .setMatchStrategy(SentinelGatewayConstants.URL_MATCH_STRATEGY_PREFIX));
-//                }});
-//        ApiDefinition api4 = new ApiDefinition("stock")
-//                .setPredicateItems(new HashSet<ApiPredicateItem>() {{
-//                    add(new ApiPathPredicateItem().setPattern("/stock/**")
-//                            .setMatchStrategy(SentinelGatewayConstants.URL_MATCH_STRATEGY_PREFIX));
-//                }});
+        ApiDefinition api3 = new ApiDefinition("order")
+                .setPredicateItems(new HashSet<ApiPredicateItem>() {{
+
+                    add(new ApiPathPredicateItem().setPattern("/order/**")
+                            .setMatchStrategy(SentinelGatewayConstants.URL_MATCH_STRATEGY_PREFIX));
+                }});
+        ApiDefinition api4 = new ApiDefinition("stock")
+                .setPredicateItems(new HashSet<ApiPredicateItem>() {{
+                    add(new ApiPathPredicateItem().setPattern("/stock/**")
+                            .setMatchStrategy(SentinelGatewayConstants.URL_MATCH_STRATEGY_PREFIX));
+                }});
         definitions.add(api1);
         definitions.add(api2);
-//        definitions.add(api3);
-//        definitions.add(api4);
+        definitions.add(api3);
+        definitions.add(api4);
         GatewayApiDefinitionManager.loadApiDefinitions(definitions);
     }
 
@@ -96,18 +96,18 @@ public class GatewayConfiguration {
                         .setParseStrategy(SentinelGatewayConstants.PARAM_PARSE_STRATEGY_CLIENT_IP)
                 )
         );
-//        rules.add(new GatewayFlowRule("order")
-//                .setCount(10)
-//                .setIntervalSec(1)
-//        );
-//        rules.add(new GatewayFlowRule("order")
-//                .setCount(2)
-//                .setIntervalSec(2)
-//                .setBurst(2)
-//                .setParamItem(new GatewayParamFlowItem()
-//                        .setParseStrategy(SentinelGatewayConstants.PARAM_PARSE_STRATEGY_CLIENT_IP)
-//                )
-//        );
+        rules.add(new GatewayFlowRule("order")
+                .setCount(10)
+                .setIntervalSec(1)
+        );
+        rules.add(new GatewayFlowRule("order")
+                .setCount(2)
+                .setIntervalSec(2)
+                .setBurst(2)
+                .setParamItem(new GatewayParamFlowItem()
+                        .setParseStrategy(SentinelGatewayConstants.PARAM_PARSE_STRATEGY_CLIENT_IP)
+                )
+        );
         rules.add(new GatewayFlowRule("provider")
                 .setCount(10)
                 .setIntervalSec(1)
@@ -146,44 +146,44 @@ public class GatewayConfiguration {
                         .setFieldName("pn")
                 )
         );
-//        rules.add(new GatewayFlowRule("stock")
-//                .setCount(10)
-//                .setIntervalSec(1)
-//                .setControlBehavior(RuleConstant.CONTROL_BEHAVIOR_RATE_LIMITER)
-//                .setMaxQueueingTimeoutMs(600)
-//                .setParamItem(new GatewayParamFlowItem()
-//                        .setParseStrategy(SentinelGatewayConstants.PARAM_PARSE_STRATEGY_HEADER)
-//                        .setFieldName("X-Sentinel-Flag")
-//                )
-//        );
-//        rules.add(new GatewayFlowRule("stock")
-//                .setCount(1)
-//                .setIntervalSec(1)
-//                .setParamItem(new GatewayParamFlowItem()
-//                        .setParseStrategy(SentinelGatewayConstants.PARAM_PARSE_STRATEGY_URL_PARAM)
-//                        .setFieldName("pa")
-//                )
-//        );
-//        rules.add(new GatewayFlowRule("stock")
-//                .setCount(2)
-//                .setIntervalSec(30)
-//                .setParamItem(new GatewayParamFlowItem()
-//                        .setParseStrategy(SentinelGatewayConstants.PARAM_PARSE_STRATEGY_URL_PARAM)
-//                        .setFieldName("type")
-//                        .setPattern("warn")
-//                        .setMatchStrategy(SentinelGatewayConstants.PARAM_MATCH_STRATEGY_CONTAINS)
-//                )
-//        );
-//
-//        rules.add(new GatewayFlowRule("stock")
-//                .setResourceMode(SentinelGatewayConstants.RESOURCE_MODE_CUSTOM_API_NAME)
-//                .setCount(5)
-//                .setIntervalSec(1)
-//                .setParamItem(new GatewayParamFlowItem()
-//                        .setParseStrategy(SentinelGatewayConstants.PARAM_PARSE_STRATEGY_URL_PARAM)
-//                        .setFieldName("pn")
-//                )
-//        );
+        rules.add(new GatewayFlowRule("stock")
+                .setCount(10)
+                .setIntervalSec(1)
+                .setControlBehavior(RuleConstant.CONTROL_BEHAVIOR_RATE_LIMITER)
+                .setMaxQueueingTimeoutMs(600)
+                .setParamItem(new GatewayParamFlowItem()
+                        .setParseStrategy(SentinelGatewayConstants.PARAM_PARSE_STRATEGY_HEADER)
+                        .setFieldName("X-Sentinel-Flag")
+                )
+        );
+        rules.add(new GatewayFlowRule("stock")
+                .setCount(1)
+                .setIntervalSec(1)
+                .setParamItem(new GatewayParamFlowItem()
+                        .setParseStrategy(SentinelGatewayConstants.PARAM_PARSE_STRATEGY_URL_PARAM)
+                        .setFieldName("pa")
+                )
+        );
+        rules.add(new GatewayFlowRule("stock")
+                .setCount(2)
+                .setIntervalSec(30)
+                .setParamItem(new GatewayParamFlowItem()
+                        .setParseStrategy(SentinelGatewayConstants.PARAM_PARSE_STRATEGY_URL_PARAM)
+                        .setFieldName("type")
+                        .setPattern("warn")
+                        .setMatchStrategy(SentinelGatewayConstants.PARAM_MATCH_STRATEGY_CONTAINS)
+                )
+        );
+
+        rules.add(new GatewayFlowRule("stock")
+                .setResourceMode(SentinelGatewayConstants.RESOURCE_MODE_CUSTOM_API_NAME)
+                .setCount(5)
+                .setIntervalSec(1)
+                .setParamItem(new GatewayParamFlowItem()
+                        .setParseStrategy(SentinelGatewayConstants.PARAM_PARSE_STRATEGY_URL_PARAM)
+                        .setFieldName("pn")
+                )
+        );
         GatewayRuleManager.loadRules(rules);
     }
 }
